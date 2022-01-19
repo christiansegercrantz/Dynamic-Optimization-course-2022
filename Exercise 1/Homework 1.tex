@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 1}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{1.5}
+\subsection*{a)}
+
+We have the functional
+\begin{equation}
+	J(x,t) = \int_{0}^{T} \frac{\dot{x}^2}{t^3}dt
+\end{equation}
+with the end points $x(0) = A$ and $x(t) = B$.
+
+To find the extremals fo the functional, we use Eulers equation
+\begin{equation}
+	g_x-\frac{d}{dt}g_{\dot{x}} = 0.
+\end{equation}
+where
+\begin{align}
+	g(x,\dot{x},t) = g &= \frac{\dot{x}^2}{t^3}\\
+	\frac{\partial}{\partial x} g= g_x &=  0 \\
+	\frac{\partial}{\partial \dot{x}} g= g_{\dot{x}} &=  \frac{2\dot{x}}{t^3}
+\end{align}
+which gives us the equation
+\begin{equation}
+	0 - \frac{d}{dt} \frac{2\dot{x}}{t^3} = 0.
+\end{equation}
+The derivative can be calculated as
+\begin{equation}
+	\frac{d}{dt} \frac{2\dot{x}}{t^3} 
+	= \frac{\frac{d}{dt}(2\dot{x})t^3 - \frac{d}{dt}(t^3)2\dot{x}}{(t^3)^2}
+	= \frac{2\ddot{x}t^3 - 6t^2\dot{x}}{t^6}
+	= \frac{2\ddot{x}t - 6\dot{x}}{t^4}
+\end{equation}
+from which our already modified eulers equation becomes 
+\begin{align}
+	\frac{2\ddot{x}t - 6\dot{x}}{t^4} &= 0\\
+	\frac{\ddot{x}}{t^3} - \frac{3\dot{x}}{t^4} &= 0\\
+	\frac{\ddot{x}}{t^3} &= \frac{3\dot{x}}{t^4} \\
+	\frac{\ddot{x}}{\dot{x}} &= \frac{3}{t}.
+\end{align}
+We can begin solving the ODE by integrating
+\begin{align}
+	\int\ddot{x} t dt &= \int3 \dot{x}dt\\
+	t\dot{x} - \int \dot{x} dt &= 3 x + c\\
+	t\dot{x} - x &= 3x +c\\
+	t\dot{x} - 4x -c &= 0
+\end{align}
+which yields us the linear first order ODE which can be solved as 
+\begin{align}
+	\dot{x} - \frac{4}{t}x - \frac{c}{t} &= 0, \qquad |\cdot e^{P(x)},P(x) = \int-\frac{4}{t}dt = -4\ln(t)\\
+	\dot{x}e^{-4\ln{t}} - \frac{4}{t}xe^{-4\ln{t}} - \frac{c}{t}e^{-4\ln{t}} &= 0, \qquad | e^{-4\ln{t}} = t^{-4}\\
+	\frac{d}{dt}\left(xt^{-4}\right) &= \frac{c}{t}t^{-4} = ct^{-5}, \qquad |\int dt\\
+	xt^{-4} &= -ct^{-4} +b, \qquad |\cdot t^4\\
+	x &= -c +bt^4, \qquad c_1 = b, c_2 = -c \\
+	x(t) &= c_1 t^4 + c_2.
+\end{align}
+We can solve the constants from the en point conditions: $x(0) = A$ and $x(t) = B$
+\begin{align}
+	x(0) &= c_1 0^4 + c_2  = A \implies c_2 = A\\
+	x(T) &= c_1 T^4 + A = B \implies c_1 = \frac{B-A}{T^4} \\
+	\implies x(t) &= \frac{B-A}{T^4} t^4 + A.
+\end{align}
+
+\subsection*{b)}
+We have the functional
+\begin{equation}
+	J(x,t) = \int_{0}^{T} (\dot{x} - 8xt +t) dt
+\end{equation}
+with the end points $x(0) = A$ and $x(t) = B$.
+
+To find the extremals fo the functional, we use Eulers equation
+\begin{equation}
+	g_x-\frac{d}{dt}g_{\dot{x}} = 0.
+\end{equation}
+where
+\begin{align}
+	g(x,\dot{x},t) = g &= \dot{x}^2 - 8xt +t\\
+	\frac{\partial}{\partial x} g= g_x &=  -8t \\
+	\frac{\partial}{\partial \dot{x}} g= g_{\dot{x}} &=  2\dot{x}
+\end{align}
+which gives us the equation
+\begin{align}
+	-8t - \frac{d}{dt} 2\dot{x} &= 0\\
+	8t + 2\ddot{x} &= 0\\
+	\ddot{x} &= -4t.
+\end{align}
+We can solve the DE by integrating twice
+\begin{align}
+	\int\ddot{x}dt &= \int -4t dt\\
+	\dot{x} &= -2t^2 +c, \qquad |\int dt\\
+	\int \dot{x} &= \int -2t^2 +c dt\\
+	x &= -\frac{2}{3}t^3+ct+b, \qquad c_1 = c, c_2 = b
+\end{align}
+Solving the linear ODE we get the solution 
+\begin{equation}
+	x(t) = -\frac{2t^3}{3} + c_1 t + c_2.
+\end{equation}
+We can solve the constants from the en point conditions: $x(0) = A$ and $x(t) = B$
+\begin{align}
+	x(0) &= -\frac{2\cdot0^3}{3} + c_1 0 + c_2 = A \implies c_2 = A\\
+	x(T) &= -\frac{2T^3}{3} + c_1 T + A = B \implies c_1 = \frac{B-A + \frac{2}{3}T^3}{T} \\
+	\implies x(t) &= -\frac{2}{3}t^3 + \frac{B-A + \frac{2}{3}T^3}{T} t + A.
+\end{align}
+\end{document}
+
+
+
+
