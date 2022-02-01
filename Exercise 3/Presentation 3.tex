@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Presentation exercise 3}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{3.1}
+\subsection*{a)}
+	
+We have the functional
+\begin{equation}
+	J(x,t) = \int_{t_0}^{t_f} x_1^2 +x_1x_2+x_2^2+x_3^2 dt
+\end{equation}
+subject to the differential equation constraints
+\begin{align}
+	\dot{x}_1 &= x_2\\
+	\dot{x}_2 &= x_3.
+\end{align}.
+
+\begin{align}
+	p &= 2\dot{x} - 3x \\
+	\dot{p} &= 2\ddot{x} - 3\dot{x}\\
+\end{align}
+
+\begin{align}
+	2\ddot{x} - 3\dot{x} &= -(\dot{x} - x) +2x - 2\dot{x} + 3x\\
+	2\ddot{x} - 3\dot{x}&= -\dot{x} +x +2x - 2\dot{x} + 3x\\
+	2\ddot{x} - 3\dot{x} &= -3\dot{x}+6x\\
+	2\ddot{x} &= 6x\\
+	\ddot{x} &= 3x
+\end{align}
+
+
+	
+\end{document}

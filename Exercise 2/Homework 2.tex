@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 2}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{1.5}
+\subsection*{a)}
+
+We have the functional
+\begin{equation}
+	J(x,t) = \int_{0}^{s} \frac{1}{2}\dot{x}^2-x+\frac{3}{2} dt
+\end{equation}
+with the end points $x(0) = 0$ and $x(s)$ is free.
+
+To find the extremals fo the functional, we use Eulers equation
+\begin{equation}
+	g_x-\frac{d}{dt}g_{\dot{x}} = 0.
+\end{equation}
+where
+\begin{align}
+	g(x,\dot{x},t) = g &= \frac{1}{2}\dot{x}^2-x+\frac{3}{2}\\
+	\frac{\partial}{\partial x} g= g_x &= -1  \\
+	\frac{\partial}{\partial \dot{x}} g= g_{\dot{x}} &= \dot{x} \\
+	\implies -1- \frac{d}{dt} \dot{x} = -1 - \ddot{x} &= 0 \iff \ddot{x} +1 = 0.
+\end{align}
+We can solve the second order DE by integrating twice:
+\begin{align}
+	\int\left(\int \ddot{x} dt\right)dt &= \int\left(\int -1 dtd \right)dt \\
+	\int\left(\dot{x}\right)dt &=\int\left(-t+c_1\right)dt \\
+	x &= -\frac{1}{2}t^2+c_1t + c_2.
+\end{align}
+From the start point condition we get
+\begin{equation}
+	x(0) = 0 = -\frac{1}{2}0^2+c_1\cdot 0 + c_2 \implies c_2=0
+\end{equation}
+and $x = -\frac{1}{2}t^2+c_1t$. Since the end state is free, we need the transversality condition 
+\begin{align}
+	g_{\dot{x}}(x(t_f),\dot{x}(t_f), t_f) &= 0\\
+	\dot{x}(s) &= 0, \qquad \mid \dot{x} = -t + c_1 \\
+	-s+c_1 = 0 \iff s&=c_1
+\end{align}
+Which gives us the solution
+\begin{equation}
+	x^*(t) = -\frac{1}{2}t^2+st
+\end{equation}
+
+\end{document}
+
+
+
+

@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{comment}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 5}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{5.1}
+
+We have the system
+\begin{align}
+	\dot{x}_1 &= -x_1 - u\\
+	\dot{x}_2 &= -3x_2 -3u
+\end{align}
+with the arbitrary initial state $x_0$ and the final state $x_{t_f}=0$. We know that the control is constrained to $|u| \leq 1$. The eigenvalues of this system is -1 and -3, which are both real and nonpositive so we know that there exists a optimal control that transfers the system from the $x_0$ to 0 in at most 1 switch.  
+
+From the system we get the Hamiltonian
+\begin{equation}
+	\mathcal{H} = 1 + p_1(-x_1-u) + p_2(-3x_2-3u).
+\end{equation} 
+The minimum principle tells us, based on the Hamiltonian, that\\
+\begin{align}
+	\mathcal{H}(x^*,u^*,p^*) &\leq \mathcal{H}(x^*,u,p^*)\\
+	-p_1 u^*  -3p_2u^* &\leq -p_1 u  -3p_2u\\
+	-(p_1 + 3p_2)u^* &\leq -(p_1 + 3p_2)u,
+\end{align}
+from which we can see that the switching function is $s(t) = -(p_1(t) + 3p_2(t))$. This gives us the optimal control
+\begin{equation}
+	u^* = 
+	\begin{cases}
+		-1, &s(t)>0 \iff p_1(t) + 3p_2(t) <0 \\
+		\text{undef} &, s(t) = 0 \iff p_1(t) = -3p_2(t) \\
+		1, &s(t)<0 \iff p_1(t) + 3p_2(t) > 0
+	\end{cases}
+\end{equation}
+
+
+\begin{comment}
+We now form the costate equations $\frac{\partial}{\partial x}\mathcal{H} = -p$
+\begin{align}
+	\dot{p}_1 &= p_1\\
+	\dot{p}_2 &= 3p_2
+\end{align}
+We get two linear differential equations which can be solved to get
+\begin{alignat}{3}
+	1.&& \dot{p}_1 &= p_1\\
+	&&\dot{p}_1 -p_1 &= 0,  &&| \cdot \int e^{-t} dt = -e^{-t}\\
+	&&\frac{d}{dt}(-p_1^* e^{-t}) &= 0,  &&| \int dt\\
+	&&	-p_1^* e^{-t} &= c_1 && | \div -e^{-t}\\
+	&& p_1^* &= -c_1e^{t} && \\
+	2.&& \dot{p}_2 &= 3p_2\\
+	&&\dot{p}_2 -3p_2 &= 0,  &&| \cdot \int e^{-3t} dt = -\frac{1}{3}e^{3t}\\
+	&&\frac{d}{dt}(-p_2^*\frac{1}{3}e^{-3t}) &= 0,  &&| \int dt\\
+	&&	-p_2^*\frac{1}{3} e^{-3t} &= c_2 && | \div e^{-3t}\\
+	&& p_2^* &= -3c_2e^{3t} &&
+\end{alignat}
+We continue by solving $\frac{\partial}{\partial p}\mathcal{H} = \dot{x}$
+\begin{alignat}{3}
+	1. 	&&\dot{x}_1 & = -x_1-u && | u = \pm 1\\
+		&&\dot{x}_1+x_1 & = \mp1 && | \cdot \int e^{t} dt = e^{t}\\
+		&& \frac{d}{dt}(x_1^* e^{t}) &= \mp e^{t} &&|\int dt\\
+		&& x^*_1 e^{t} &= \mp e^{t} + c_3 && | \div e^{t}\\
+		&& x^*_1 &= \mp 1 + c_3 e^{-t} && \\
+	2.	&& \dot{x}_2 &= -3x_2-3u && | u = \pm 1\\
+		&& \dot{x}_2  +3x_2 &= \mp3 && | \cdot \int e^{3t} dt = \frac{1}{3}e^{3t}\\
+		&& \frac{d}{dt}(x_2^*\frac{1}{3} e^{3t}) &= \mp\frac{1}{3} e^{3t} &&|\int dt\\\\
+		&& x_2^*\frac{1}{3} e^{3t} &= \mp\frac{1}{3} e^{3t} +c_4 && | \div mp\frac{1}{3} e^{3t}\\
+		&& x_2^* &=\mp 1 + 3c_4 e^{-3t}
+\end{alignat}
+
+Which gives the the optimal control again as 
+\begin{equation}
+	u^* = 
+	\begin{cases}
+		-1, &s(t)>0 \iff p_1(t) + 3p_2(t) <0 \\
+		1, &s(t)<0 \iff p_1(t) + 3p_2(t) > 0
+	\end{cases}
+\end{equation}
+\end{comment}
+\end{document}
+
+
+
+

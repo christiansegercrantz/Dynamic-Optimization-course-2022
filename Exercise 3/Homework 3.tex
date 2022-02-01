@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 3}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{1.5}
+\subsection*{a)}
+
+We have the functional
+\begin{equation}
+	J(x,t) = \int_{0}^{2} 2x-3u-u^2 dt
+\end{equation}
+with the end points $x(0) = 5$ and $x(2)$ is free and the differential equation constraint $\dot{x} = x + u$.
+
+To find the optimal control and optimal state trajectory we need the following costate equations and stationary condition:
+\begin{align}
+	H(x,u,p) &= g(x,u,t) + p\cdot f(x,u,t)\\
+	\frac{\partial H}{\partial p} &= \dot{x} \\
+	-\frac{\partial H}{\partial x} &= \dot{p} \\
+	\frac{\partial H}{\partial u} &= 0 \\ 
+	\frac{\partial h}{\partial x}(x,t_f) - p(t_f) &= 0, \qquad |\delta x_f = arbitary, h=0 \\
+\end{align}
+Which, by inserting our case, becomes
+\begin{align}
+	H(x,u,p) &= 2x-3u-u^2 + p (x+u)\\
+	x+u &= \dot{x} \\
+	-2-p &= \dot{p} \\
+	-3-2u+p &= 0 \\ 
+	p(2) &= 0
+\end{align}
+We can start by finding the optimal Lagrange multiplier by solving the linear differential equation
+\begin{align}
+	\dot{p} + p + 2 &= 0, \qquad | \cdot e^{t} \\
+	\frac{d}{dt}\left(pe^{t}\right) &= -2 e^{t},	\qquad |\int dt\\
+	p e^{t} &= -2e^{t} +c_1\\
+	p &= c_1 e^{-t}-2 \\
+	p(2) = 0 &= c_1e^{-2}-2 \iff c_1 = 2e^{2}\\
+	p^* &= 2e^{2}e^{-t}-2
+\end{align}
+We can now substitute it into the stationary condition to get u
+\begin{align}
+	-3-2u+p &= 0\\
+	2u &= p-3\\
+	u &= \frac{(2e^{2}e^{-t}-2)-3}{2} \\
+	u^* &= e^{2}e^{-t} - \frac{5}{2}
+\end{align}
+We can now substitute u into the first costate equation
+\begin{align}
+	x+u &= \dot{x} \\
+	\dot{x} -x &= e^{2}e^{-t} - \frac{5}{2}, \qquad |\cdot e^{-t}  \\
+	\frac{d}{dt}\left(x e^{-t}\right) &= e^{2}e^{-2t} - \frac{5}{2}e^{-t} \qquad |\int dt\\
+	x e^{-t} &= -\frac{e^{2}}{2}e^{-2t}+ \frac{5}{2}e^{-t} + c_2 \\
+	x &= -\frac{e^{2}}{2}e^{-t}- \frac{5}{2} + c_2e^t
+\end{align}
+Using the boundary condition we get that
+\begin{align}
+	x(0) = 5 &= -\frac{e^{2}}{2}e^{0}- \frac{5}{2} + c_2e^0 \iff c_2 = \frac{15+e^2}{2}
+\end{align}
+and thus have the solutions
+\begin{align}
+	x^* &= -\frac{1}{2}e^{-t+2} + \frac{15+e^2}{2}e^t- \frac{5}{2} \\
+	u^* &= e^{-t+2} - \frac{5}{2}\\
+	p^* &= 2e^{-t+2}-2
+\end{align}
+
+\end{document}
+
+
+
+

@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 4}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{4.5}
+
+\subsection*{a)}
+
+We denote the following quantities:
+\begin{enumerate}
+	\item $t$ = Time
+	\item $x(t)$ = Brand equity at time $t$
+	\item $R(x)$ = The maximum revenue a firm can earn by selling the
+	product with brand equity $x$.
+	\item $I(t)$ = Advertising cost at time $t$, max at $\bar{I}$
+\end{enumerate}
+Additionally, we know that $\dot{R} > 0$, $\ddot{R}<0$ which gives the function R a concave shape, i.e. it will have a maximum at least locally. Furthermore, we know that the change in brand equity can be written as $\dot{x} = I(t) - bx(t)$, since advertising increases the rate and it decays at a proportional rate.
+
+The profit flow $\pi$ can thus be modeled as 
+\begin{align}
+	\pi &= R(x) - I(t)\\
+	\implies \pi &= R(x) - \dot{x}(t) - bx(t)\\
+\end{align}
+which does not explicitly depend on the time $t$. Here we have assumed all other costs and incomes are neglectable. With this information we can model this as a infinite horizon autonomous problem as 
+\begin{equation}
+	\int_{0}^{\infty} e^{-rt}(R(x) - \dot{x}(t) - bx(t)) dt
+\end{equation}
+by adding the discounting factor $e^{-rt}$ we get the present value, and the functional is explicitly independent of $t$.
+
+\subsection*{b)}
+Since our problem is an infinite horizon autonomous problem, and we know that the function is concave, we can assume that it can be optimized to a steady state $\lim\limits_{t_f \rightarrow\infty}x\implies x_s$. This results in the stationary conditions $\dot{x} = 0$, $\ddot{x} = 0$. Using this we can solve the problem using the most rapid approach path. Since our profit flow function is a linear function of $\dot{x}$ dependent of $x$, i.e. has the form $\int_{0}^{\infty}e^{-rt}\left(M(x) - N(x)\dot{x}\right)dt$. From the lecture slides we thus get
+\begin{equation}
+	\dot{x} =
+	\begin{cases}
+		B(x),& x_0 < x_s\\
+		0,& x_0 = x_s\\
+		A(x), &x_0 > x_s
+	\end{cases},
+\end{equation}
+ where $A(x)$ and $B(x)$ represent the boundaries of the problem. We can find the problem, knowing that the advertisement $I(t)$ is $0 \leq I \leq \bar{I}$. This leads, by substitution to $-bx \leq \dot{x} \leq \bar{I} -bx$ and we get the solution for $\dot{x}^*$ to
+\begin{equation}
+	\dot{x} =
+	\begin{cases}
+		\bar{I} -bx,& x_0 < x_s\\
+		0,& x_0 = x_s\\
+		-bx, &x_0 > x_s
+	\end{cases}
+\end{equation}
+and by realigning the formula for the change in brand equity to $I(t) = \dot{x}(t) + bx(t)$, we get the optimal solution for the advertisement to
+\begin{equation}
+	I^* =
+	\begin{cases}
+		0,& x_0 < x_s\\
+		bx_s,& x_0 = x_s\\
+		\bar{I}, &x_0 > x_s
+	\end{cases}
+\end{equation}
+\end{document}
+
+
+
+

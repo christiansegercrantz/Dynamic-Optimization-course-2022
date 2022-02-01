@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Presentation exercise 3}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{4.1}
+	
+
+\begin{align}
+	\dot{x} - x &= -2Ae^{-t}, \qquad | \cdot \int e^{-t} dt = -e^{-t}\\
+	\frac{d}{dt}(-x e^{-t}) &= 2Ae^{-2t} , \qquad | \int dt\\
+	-x e^{-t} &= -Ae^{-2t} + c , \qquad | \div -e^{-t}\\
+	x &= Ae^{-t} - ce^{t} , \qquad | B = -c\\
+	x &= Ae^{-t} + Be^{t}
+\end{align}
+
+\begin{align}
+	\frac{\partial}{\partial x}h(x^*(t_f),t_f) - p^*(t_f) &= 0
+\end{align}
+
+\begin{align}
+	\dot{k} + cK &= -\frac{1}{2}\alpha b^2 e^{ct}, \qquad | \cdot \frac{1}{c}e^{ct}\\
+	\frac{d}{dt}\left(k \frac{1}{c}e^{ct}\right) &= -\frac{1}{2}\alpha b^2 e^{ct} \frac{1}{c}e^{ct} = -\frac{1}{2c}\alpha b^2e^{2ct}, \qquad | \int dt\\
+	k^* \frac{1}{c}e^{ct} &= -\frac{\alpha b^2}{4c^2} e^{2ct} + d, \qquad | \div \frac{1}{c}e^{ct}\\
+	k^* &= -\frac{\alpha b^2}{4c}e^{ct} + d ce^{-ct}, \qquad | \beta = d c\\
+	k^* &= -\frac{\alpha b^2}{4c}e^{ct} + \beta e^{-ct}
+\end{align}
+
+	
+\end{document}
