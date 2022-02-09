@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework 6}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+	\section*{6.6}
+	
+	\begin{align}
+		J(n,m) =
+		\begin{cases}
+			0, & n < y_i \land m < x_i \forall i\\
+			\max_i \left\lbrace u_i + J(n-y_i, m) \right\rbrace, & m \leq x_i \\
+			\max_i \left\lbrace u_i + J(n, m-x_i) \right\rbrace, & n \leq y_i \\
+			\begin{cases}
+				\max_i \left\lbrace u_i + J(n, m-x_i) + J(n, x_i) \right\rbrace \\
+				\max_i \left\lbrace u_i + J(n- y_i, m) + J(y_i, m) \right\rbrace
+			\end{cases}, & \text{else}
+		\end{cases}
+	\end{align}
+
+\end{document}
