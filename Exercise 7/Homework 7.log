@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.22)  15 FEB 2022 17:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.1.22)  15 FEB 2022 20:45
 entering extended mode
 **"./Homework 7.tex"
 ("Homework 7.tex"
@@ -326,12 +326,16 @@ L/cmm/m/it/10 ; \OT1/cmr/m/n/10 30%[]10%$
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[2] [3] ("Homework 7.aux") ) 
+[2]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3] [4] ("Homework 7.aux") ) 
 Here is how much of TeX's memory you used:
- 4469 strings out of 492946
- 67029 string characters out of 3135480
- 150284 words of memory out of 3000000
- 8300 multiletter control sequences out of 15000+200000
+ 4471 strings out of 492946
+ 67045 string characters out of 3135480
+ 151300 words of memory out of 3000000
+ 8302 multiletter control sequences out of 15000+200000
  11620 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,14n,39p,627b,281s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -348,9 +352,9 @@ msfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/eurosym/feymr10.pfb><C:/Prog
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "Homework 7.pdf" (3 pages, 138655 bytes).
+Output written on "Homework 7.pdf" (4 pages, 142639 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 71 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

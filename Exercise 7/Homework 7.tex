@@ -13,7 +13,7 @@
 
 \graphicspath{ {plots/} }
 
-\title{Dynamic Optimization - Homework assignment 5}
+\title{Dynamic Optimization - Homework assignment 7}
 \author{Christian Segercrantz 481056}
 
 
@@ -86,8 +86,7 @@ We can write a table to find the optimal control policy which can be seen in Tab
 	\end{tabular}
 \end{table}
 
-For k=2 we then get,
-
+For k=2 we then get
 \begin{align}
 	J_2(x_2) = &
 	\begin{cases}
@@ -98,12 +97,16 @@ For k=2 we then get,
 		c u_2 - 5x_2 + J_2(x_{2} + u_2 - w_2), & w_2 \geq x_2\\
 		c u_2 - 5w_2 + J_2(x_{2} + u_2 - w_2), & w_2 < x_2
 	\end{cases}\\
-	J_2(x_2) =& \mathbb{E}_{w_k}\lbrace g_2(x_2,u_2,w_2)\rbrace + \mathbb{E}_{w_k}\lbrace J_3(x_{2} + u_2 - w_2)\rbrace 
+	J_2(x_2) =& \mathbb{E}_{w_k}\lbrace g_2(x_2,u_2,w_2)\rbrace + \mathbb{E}_{w_k}\lbrace J_3(x_{2} + u_2 - w_2)\rbrace.
 \end{align}
-
+The first term is calculated the same way as earlier, but the second term is now the expected value of the optimal values from earlier. I.e. for $x_2=2, u_2=1$ we get that 
+\begin{equation}
+	\mathbb{E}_{w_k}\lbrace J_3(x_{2} + u_2 - w_2)\rbrace = 0.1 J_3(x_{2} + u_2 - 0) + 0.2 J_3(x_{2} + u_2 - 1) + 0.2 J_3(x_{2} + u_2 - 2) + 0.3 J_3(x_{2} + u_2 - 3)
+\end{equation}
+which will result equal $-6-4.35=-10.35$. We get the values for $J_3$ from Table \ref{tab:k3}. The values for $J_2(x_2)$ can be seen in Table \ref{tab:k2}
 \begin{table}[h]
 	\centering
-	\caption{k=2, , the minimi per row is marked with bold}
+	\caption{k=2, the minimi per row is marked with bold}
 	\label{tab:k2}
 	\begin{tabular}{l|llll|l}
 		k=2     & $u_2=0$         & $u_2=1$ & $u_2=2$        & $u_2=3$        & $\mu_2^*$ \\ \hline
@@ -113,7 +116,35 @@ For k=2 we then get,
 		$x_2=3$ & \textbf{-14.35} & -       & -              & -              & 0        
 	\end{tabular}
 \end{table}
+For $k=1$ we only have to count the row for when $x_1=0$ sine we have no packages in the beginning. We will however count all, since we will need it in the b) part. The result can be seen from Table \ref{tab:k1}
 
+\begin{table}[h]
+	\centering
+	\caption{k=1, the minimi per row is marked with bold}
+	\label{tab:k1}
+	\begin{tabular}{l|llll|l}
+		k=1     & $u_1=0$         & $u_1=1$ & $u_1=2$        & $u_1=3$        & $\mu_1^*$ \\ \hline
+		$x_1=0$ & -4.35           & -4.95   & -5.76          & \textbf{-6.17} & 3         \\
+		$x_1=1$ & -8.95           & -8.76   & \textbf{-9.17} &        -        & 2         \\
+		$x_1=2$ & \textbf{-12.76} & -12.17  &   -             &        -        & 0         \\
+		$x_1=3$ & \textbf{-16.17} &   -      &      -          &       -         & 0        
+	\end{tabular}
+\end{table}
+We can see that the optimal control policy is $\mu_1^*(x_1) = 3$ since $x_1=0$. Which gives us $J_1(0) = -6.17$\euro loss i.e. $6.17$\euro profit. The optimal control policies and expected profits for specific days are seen in each table.
+
+
+\subsection*{b)}
+We now have an additional day which leads to another iteration. Since the probability distribution is the same as for $k=1$ we can do the exactly same calculation except using $J_1$ isntead of $J_2$. Since we only have one possibility for $x_0$ which is $0$ we get the result seen in Table \ref{tab:k0}. The control policy is $\mu_0^*(0) = 3)$, which gives us $J_0(0) = -8.21$\euro loss i.e. $8.21$\euro profit.
+
+\begin{table}[h]
+	\centering
+	\caption{k=0, the minimi per row is marked with bold}
+	\label{tab:k0}
+	\begin{tabular}{l|llll|l}
+		k=0     & $u_0=0$         & $u_0=1$ & $u_0=2$        & $u_0=3$         & $\mu_0^*$ \\ \hline
+		$x_0=0$ & -6.17           & -6.77   & -7.688         & \textbf{-8.206} & 3     
+	\end{tabular}
+\end{table}
 \end{document}
 
 
