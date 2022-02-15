@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage{eurosym}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 5}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{7.6}
+
+We know that on the 0th and 1st day the probabilities of the demand being 0, 1, 2, or 3 is $20\%, 40\%, 30\% \text{ and } 10\%$ and after that $10\%, 20\%, 30\%, \text{ and } 40\%$ respectively. We can sell a package at 5\euro á piece. We additionally know that we can manufacture 0-3 packages per day at the cost of 0\euro, 4\euro, 7\euro, or 10\euro. We also assume that unsold packages can transfer to the following day. The mean of the demand of the 0th and 1st day is 1.3 and for the remaining days 2. 
+
+We can model the packages per day as
+\begin{equation}
+	x_{k+1} = x_{k} + u_k - w_k
+\end{equation}
+where x is the amount of items per day, u is the amount of new packages fabricated and w is the stochastic demand.
+
+The cost can be modeled as 
+\begin{equation}
+	g_k(x_k,u_k,w_k) = c u_k - 5\min(w_k,x_k) =
+	 \begin{cases}
+		c u_k - 5x_k, & w_k \geq x_k\\
+		c u_k - 5w_k, & w_k < x_k
+	\end{cases} 
+\end{equation}
+where describes the cost per fabricated package.
+
+The control policy $u_k = \mu^*_k(x_k)$ has the following constrains
+\begin{equation}
+	u \in
+	\begin{cases}
+		\lbrace0,1,2,3\rbrace, &x_k = 0\\
+		\lbrace0,1,2\rbrace, &x_k = 1\\
+		\lbrace0,1\rbrace, &x_k = 2\\
+		\lbrace0\rbrace, &x_k = 3\\	
+	\end{cases}
+\end{equation}
+
+We want to minimize the cost  according to the formula
+\begin{equation}
+	\sum_{n=1}^{3} g_k(x_k,u_k,w_k)
+\end{equation}
+where c is the cost of production.
+
+\begin{equation}
+	J_k(x_k) = \max_{u_k} \mathbb{E} \lbrace g_k(x_k,u_k,w_k) + J_{k+1}(x_k) \rbrace
+\end{equation}
+
+We start with k=3
+\begin{equation}
+	J_3(x_3) = 	 \begin{cases}
+		c u_3 - 5x_3, & w_3 \geq x_3\\
+		c u_3 - 5w_3, & w_3 < x_3
+	\end{cases} .
+\end{equation}
+We can write a table to get the optimal answer
+
+For k=2 we then get, by substituting in the result for k=3,
+
+\begin{equation}
+	J_2(x_2) = 
+\end{equation}
+
+\end{document}
+
+
+
+
