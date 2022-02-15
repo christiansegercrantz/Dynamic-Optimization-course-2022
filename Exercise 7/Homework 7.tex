@@ -23,13 +23,13 @@
 
 \section*{7.6}
 
-We know that on the 0th and 1st day the probabilities of the demand being 0, 1, 2, or 3 is $20\%, 40\%, 30\% \text{ and } 10\%$ and after that $10\%, 20\%, 30\%, \text{ and } 40\%$ respectively. We can sell a package at 5\euro á piece. We additionally know that we can manufacture 0-3 packages per day at the cost of 0\euro, 4\euro, 7\euro, or 10\euro. We also assume that unsold packages can transfer to the following day. The mean of the demand of the 0th and 1st day is 1.3 and for the remaining days 2. 
+We know that on the 0th and 1st day the probabilities of the demand being 0, 1, 2, or 3 is $20\%, 40\%, 30\% \text{ and } 10\%$ and after that $10\%, 20\%, 30\%, \text{ and } 40\%$ respectively. We can sell a package at 5\euro á piece. We additionally know that we can manufacture 0-3 packages per day at the cost of 0\euro, 4\euro, 7\euro, or 10\euro. We also assume that unsold packages can transfer to the following day. The mean of the demand of the 0th and 1st day is 1.3 and for the remaining days 2. We assume that $x_0 = 0$ and that since the demand is 0 in the end $J_4(x_4) = 0$
 
 We can model the packages per day as
 \begin{equation}
-	x_{k+1} = x_{k} + u_k - w_k
+	x_{k+1} = x_{k} + u_k - w_k, \qquad x_{k+1}\geq 0
 \end{equation}
-where x is the amount of items per day, u is the amount of new packages fabricated and w is the stochastic demand.
+where x is the amount of items per day, u is the amount of new packages fabricated and w is the stochastic demand. Here we assume that the packs can be stored from one day to the next. 
 
 The cost can be modeled as 
 \begin{equation}
@@ -39,7 +39,7 @@ The cost can be modeled as
 		c u_k - 5w_k, & w_k < x_k
 	\end{cases} 
 \end{equation}
-where describes the cost per fabricated package.
+where c describes the cost per fabricated package.
 
 The control policy $u_k = \mu^*_k(x_k)$ has the following constrains
 \begin{equation}
@@ -58,24 +58,61 @@ We want to minimize the cost  according to the formula
 \end{equation}
 where c is the cost of production.
 
-\begin{equation}
-	J_k(x_k) = \max_{u_k} \mathbb{E} \lbrace g_k(x_k,u_k,w_k) + J_{k+1}(x_k) \rbrace
-\end{equation}
-
+\begin{align}
+	J_k(x_k) &= \max_{u_k} \mathbb{E}_{w_k} \lbrace g_k(x_k,u_k,w_k) + J_{k+1}(x_{k+1}) \rbrace \\
+	&= \max_{u_k} \mathbb{E}_{w_k} \lbrace g_k(x_k,u_k,w_k) + J_{k+1}(x_{k} + u_k - w_k) \rbrace
+\end{align}
+\subsection*{a)}
 We start with k=3
-\begin{equation}
-	J_3(x_3) = 	 \begin{cases}
-		c u_3 - 5x_3, & w_3 \geq x_3\\
-		c u_3 - 5w_3, & w_3 < x_3
-	\end{cases} .
-\end{equation}
-We can write a table to get the optimal answer
+\begin{align}
+	J_3(x_3) =& 
+	\begin{cases}
+		c u_3 - 5x_3 + J_4(x_4), & w_3 \geq x_3\\
+		c u_3 - 5w_3 + J_4(x_4), & w_3 < x_3
+	\end{cases}\\
+	\mathbb{E}_{w_k}\lbrace J_3(x_3)\rbrace =& cu_3 -5(0.1\min(0,\max(x_3+u_3,3)) + 0.2\min(1,\max(x_3+u_3,3)) +\\ &0.3\min(2,\max(x_3+u_3,3))+0.4\min(3,\max(x_3+u_3,3)))
+\end{align}
+We can write a table to find the optimal control policy which can be seen in Table \ref{tab:k3}. An example of the calculation is e.g. for $x_3 = 2, u_3 = 1$: $4-5(0.1\cdot0 + 0.2\cdot1 +0.3\cdot2+0.4\cdot3) = -6$
+\begin{table}[h]
+	\centering
+	\caption{$k=3$, the minimi per row is marked with bold.}
+	\label{tab:k3}
+	\begin{tabular}{l|llll|l}
+		k=3     & $u_3=0$       & $u_3=1$ & $u_3=2$     & $u_3=3$ & $\mu_3^*$ \\ \hline
+		$x_3=0$ & 0             & -0.5    & \textbf{-1} & 0       & 2         \\
+		$x_3=1$ & \textbf{-4.5} & -4      & -3          & -       & 0         \\
+		$x_3=2$ & \textbf{-8}   & -6      & -           & -       & 0         \\
+		$x_3=3$ & \textbf{-10}  & -       & -           & -       & 0        
+	\end{tabular}
+\end{table}
 
-For k=2 we then get, by substituting in the result for k=3,
+For k=2 we then get,
 
-\begin{equation}
-	J_2(x_2) = 
-\end{equation}
+\begin{align}
+	J_2(x_2) = &
+	\begin{cases}
+		c u_2 - 5x_2 + J_3(x_3), & w_2 \geq x_2\\
+		c u_2 - 5w_2 + J_3(x_3), & w_2 < x_2
+	\end{cases}\\
+	=& \begin{cases}
+		c u_2 - 5x_2 + J_2(x_{2} + u_2 - w_2), & w_2 \geq x_2\\
+		c u_2 - 5w_2 + J_2(x_{2} + u_2 - w_2), & w_2 < x_2
+	\end{cases}\\
+	J_2(x_2) =& \mathbb{E}_{w_k}\lbrace g_2(x_2,u_2,w_2)\rbrace + \mathbb{E}_{w_k}\lbrace J_3(x_{2} + u_2 - w_2)\rbrace 
+\end{align}
+
+\begin{table}[h]
+	\centering
+	\caption{k=2, , the minimi per row is marked with bold}
+	\label{tab:k2}
+	\begin{tabular}{l|llll|l}
+		k=2     & $u_2=0$         & $u_2=1$ & $u_2=2$        & $u_2=3$        & $\mu_2^*$ \\ \hline
+		$x_2=0$ & 0               & -1.85   & -3.4           & \textbf{-4.35} & 3         \\
+		$x_2=1$ & -5.85           & -6.4    & \textbf{-7.35} & -              & 2         \\
+		$x_2=2$ & \textbf{-10.4}  & -10.35  & -              & -              & 0         \\
+		$x_2=3$ & \textbf{-14.35} & -       & -              & -              & 0        
+	\end{tabular}
+\end{table}
 
 \end{document}
 
