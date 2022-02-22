@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{comment}
+\usepackage{eurosym}
+
+\graphicspath{ {plots/} }
+
+\title{Dynamic Optimization - Homework assignment 9}
+\author{Christian Segercrantz 481056}
+
+
+\begin{document}
+	\maketitle
+	\pagebreak
+
+\section*{9.4}
+
+We know the state equation 
+\begin{equation}
+	\dot{x} = -10x(t) + u(t)
+\end{equation}
+and we want to minimize the performance measure
+\begin{equation}
+	J= \frac{1}{2}x^2(0.04) + \int_{0}^{0.04} \left[ \frac{1}{4}x^2(t) + \frac{1}{2}u^2(t) \right]  dt
+\end{equation}
+We will write the Hamiltonian as
+\begin{equation}
+	H(x,u,p,t) = \frac{1}{4}x^2(t) + \frac{1}{2}u^2(t) + \nabla_x J^* (t,x)(-10x(t) + u(t))
+\end{equation}
+The Hamilton-Jacobi-Bellman equation is
+\begin{align}
+	0 = \min_{u\in U}\left[ \nabla_t J^*(t,x) + H(x,u,p,t)\right]
+\end{align}
+with the boundary condition
+\begin{equation}
+	J^*(T,x) = h(x,T).
+\end{equation}
+We take the first order derivative of the Hamiltonian w.r.t $u$ and get
+\begin{equation}
+	H_u = u+\nabla_xJ^*,
+\end{equation}
+which gives us
+\begin{align}
+	0 =&  + u^*+\nabla_xJ^* \\
+	u^* =& - \nabla_xJ^* \\
+	\implies H =&  \frac{1}{4}x^2 + \frac{1}{2}(- \nabla_xJ^*)^2 + \nabla_x J^*\cdot(-10x  - \nabla_xJ^*) \\
+	=& \frac{1}{4}x^2 - \frac{1}{2}(\nabla_xJ^*)^2 -10x\nabla_x J^* 
+\end{align}
+We will use the trial function and the following results
+\begin{align}
+	J(x(t),t) =& a(t)x^2(t) + b(t)x(t) + c(t) \\
+	J_x =& 2ax + b \\
+	J_t =& \dot{a}x^2 + \dot{b}x + \dot{c} \\
+	u =& -\dot{a}x^2 - \dot{b}x - \dot{c} - 2ax - b
+\end{align}
+By inserting this into the HJB equation we get
+\begin{align}
+	0 =& \dot{a}x^2 + \dot{b}x + \dot{c} + \frac{1}{4}x^2 + \frac{1}{2}(2ax + b) ^2 - 10x(2ax + b) \\
+	-(\dot{a}x^2 + \dot{b}x + \dot{c})=& \frac{1}{4}x^2 + \frac{1}{2}a^2x^2 +abx + \frac{1}{2}b^2 - 20ax^2 + 10bx \\ 
+	=& x^2\left( \frac{1}{4}+\frac{1}{2}a^2-20a\right) + x(ab + 10b) + \left( \frac{1}{2} b^2\right) 
+\end{align}
+And by comparing the terms on both side we get the three ODEs
+\begin{align}
+	-\dot{a} =& \frac{1}{4}+\frac{1}{2}a^2-20a \label{eq:1}\\
+	-\dot{b} =& ab + 10b \label{eq:2}\\
+	-\dot{c} =& \frac{1}{2} b^2 \label{eq:3}
+\end{align}
+We insert equations \ref{eq:1}-\ref{eq:3} into wolfram alpha to solve and get
+\end{document}
+
+
+
+

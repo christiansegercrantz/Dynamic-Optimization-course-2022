@@ -1,0 +1,185 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5749,        175]
+NotebookOptionsPosition[      5106,        155]
+NotebookOutlinePosition[      5447,        170]
+CellTagsIndexPosition[      5404,        167]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"DSolve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{
+        RowBox[{"a", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"1", "/", "4"}], "+", 
+       RowBox[{
+        RowBox[{"1", "/", "2"}], 
+        RowBox[{"a", "[", "t", "]"}]}], "-", 
+       RowBox[{"20", 
+        RowBox[{"a", "[", "t", "]"}]}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{
+        RowBox[{"b", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"a", "[", "t", "]"}], "*", 
+        RowBox[{"b", "[", "t", "]"}]}], "+", 
+       RowBox[{"10", 
+        RowBox[{"b", "[", "t", "]"}]}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{
+        RowBox[{"c", "'"}], "[", "t", "]"}]}], "==", 
+      RowBox[{
+       RowBox[{"1", "/", "2"}], 
+       RowBox[{
+        RowBox[{"b", "[", "t", "]"}], "^", "2"}]}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "t"}], "]"}]], "Input",
+ CellChangeTimes->{{3.854424602970158*^9, 3.854424737203125*^9}, {
+  3.854424884330084*^9, 3.8544248891741695`*^9}, {3.8544249222675667`*^9, 
+  3.854424925543051*^9}, {3.854425007124384*^9, 3.8544250404843235`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"d9f00f55-dd64-43d0-ac80-20b8e211126d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "\[Rule]", 
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", "t", "}"}], ",", 
+       RowBox[{
+        FractionBox["1", "78"], "+", 
+        RowBox[{
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{
+           RowBox[{"39", " ", "t"}], "/", "2"}]], " ", 
+         RowBox[{"C", "[", "1", "]"}]}]}]}], "]"}]}], ",", 
+    RowBox[{"b", "\[Rule]", 
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", "t", "}"}], ",", 
+       RowBox[{
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{
+          RowBox[{"-", 
+           FractionBox[
+            RowBox[{"781", " ", "t"}], "78"]}], "-", 
+          RowBox[{
+           FractionBox["2", "39"], " ", 
+           SuperscriptBox["\[ExponentialE]", 
+            RowBox[{
+             RowBox[{"39", " ", "t"}], "/", "2"}]], " ", 
+           RowBox[{"C", "[", "1", "]"}]}]}]], " ", 
+        RowBox[{"C", "[", "2", "]"}]}]}], "]"}]}], ",", 
+    RowBox[{"c", "\[Rule]", 
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", "t", "}"}], ",", 
+       RowBox[{
+        RowBox[{"C", "[", "3", "]"}], "+", 
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", 
+            FractionBox["1", "2"]}], " ", 
+           SuperscriptBox["\[ExponentialE]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", 
+               FractionBox["4", "39"]}], " ", 
+              SuperscriptBox["\[ExponentialE]", 
+               FractionBox[
+                RowBox[{"39", " ", 
+                 RowBox[{"K", "[", "1", "]"}]}], "2"]], " ", 
+              RowBox[{"C", "[", "1", "]"}]}], "-", 
+             FractionBox[
+              RowBox[{"781", " ", 
+               RowBox[{"K", "[", "1", "]"}]}], "39"]}]], " ", 
+           SuperscriptBox[
+            RowBox[{"C", "[", "2", "]"}], "2"]}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"K", "[", "1", "]"}], ",", "1", ",", "t"}], "}"}], ",", 
+          RowBox[{"Assumptions", "\[Rule]", "True"}]}], "]"}]}]}], "]"}]}]}], 
+   "}"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.854424702937971*^9, 3.8544247398145475`*^9, 3.8544248908982077`*^9, 
+   3.854424927576778*^9, {3.8544250160728645`*^9, 3.85442504582428*^9}},
+ CellLabel->"Out[7]=",ExpressionUUID->"119f49c5-76f4-44ab-8b0a-9d1be86bb35b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "[", "x", "]"}], " ", "/.", " ", "%7"}]], "Input",
+ CellChangeTimes->{{3.8544250930199103`*^9, 3.8544250942835803`*^9}, {
+  3.854425129384432*^9, 3.8544252028952255`*^9}, {3.8544252511216063`*^9, 
+  3.8544252731450152`*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"eb2bfb62-e1f7-40c5-8c01-8fa026c49b97"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["1", "78"], "+", 
+   RowBox[{
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"39", " ", "x"}], "/", "2"}]], " ", 
+    RowBox[{"C", "[", "1", "]"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.8544252617731705`*^9, 3.8544252765049305`*^9}},
+ CellLabel->"Out[9]=",ExpressionUUID->"14bc7961-11c9-42f9-8164-91b1762e2a1b"]
+}, Open  ]]
+},
+WindowSize->{759, 833},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1346, 39, 48, "Input",ExpressionUUID->"d9f00f55-dd64-43d0-ac80-20b8e211126d"],
+Cell[1929, 63, 2388, 66, 149, "Output",ExpressionUUID->"119f49c5-76f4-44ab-8b0a-9d1be86bb35b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4354, 134, 341, 6, 28, "Input",ExpressionUUID->"eb2bfb62-e1f7-40c5-8c01-8fa026c49b97"],
+Cell[4698, 142, 392, 10, 88, "Output",ExpressionUUID->"14bc7961-11c9-42f9-8164-91b1762e2a1b"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
