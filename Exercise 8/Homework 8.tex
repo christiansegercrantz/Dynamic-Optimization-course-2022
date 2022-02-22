@@ -23,16 +23,73 @@
 
 \section*{8.5}
 
-Since we know that if we haven't hired a handyperson when the last one enters the office, we will hire him. Thus
+We will use the following notation: \\
+$ x = $ number of candidates left to interview\\
+$ y = $ rejected number of candidates so that $x+y = N$. \\
+$ m = $ number of viable choices left in the queue. \\
+$ u_y =$ binary variable indicating if we accept or not.
+$ J(x, y,m) = $ the probability with an optimal control strategy for choosing the handyperson. \\
+By viable we mean either the best or second best choice.
+
+We will start by two trivial cases:
+\begin{equation}
+	J(x,y,0) = 0
+\end{equation}
+Since we have 0 viable candidates left, there is 0 probability to choose a viable one. 
 
 \begin{equation}
-	J_n(x_n) = 
-	\begin{cases}
-		t(x_n), & \\ 
-		0, &else
-	\end{cases}
+	J(a,y,a) = 1
 \end{equation}
+If we have as many candiates left as there are optimal ones left, we are sure to choose a optimal one. 
 
+Let us start by looking at the cases:
+
+\subsubsection*{N=2}
+
+Since we have 2 candidates and we need to choose the best or second best, it's trivial to see that with any strategy we get
+\begin{equation}
+	J(2,0,2) = 1 
+\end{equation}
+And thus we can either reject or accept the first candidate and then pick the second.
+
+\subsubsection*{N=3}
+
+When $(x=3,y=0)$ we have $m=2$ and can either accept or reject the first candiate. If we accept we have a $\frac{m}{x} = \frac{2}{3}$ chances of choosing a viable candidate. If we reject, there is a $\frac{m}{x} = \frac{2}{3}$ chance we reject a viable candidate and a $1-\frac{m}{x} = \frac{1}{3}$ chance to reject a non-viable candidate. This gives us the scenario
+
+\begin{align}
+	J(3,0,2) &= \max_{u_{0}}\left[\frac{2}{3} u_{0}, (1-u_{0}) \frac{2}{3} J(2,1,1) +  \frac{1}{3} J(2,1,2) \right] 
+\end{align}
+And we already know that $J(a,y,a) = 1 \implies J(2,1,2) = 1$.
+
+For $J(2,1,1)$ two different cases:
+\begin{enumerate}
+	\item The rejected candidate is ranked lower than the second. There is a $\frac{1}{m} = \frac{1}{2}$ chance of the first rejected candidate (which we know was a viable candidate) to have been the second best candidate. There is equally a $\frac{1}{x} = \frac{1}{2}$ chance that the second candidate is the best, and only viable, candidate. Thus this scenario has a $\frac{1}{4}$ chance to happen. 
+	
+	\item The rejected candidate is ranked higher than the second. Since we have two scenarios, this is the complement of the first case at $\frac{3}{4}$.
+\end{enumerate}
+If the first case happens, we can for sure know that the second candidate is either the best or second-best. If the second case happens, i.e. we do not know weather we rejected the best or the second best, we have a $\frac{1}{4}$ chance that the evaluated candidate is the second best candidate. I.e. there is a $\frac{3}{4}$ chance that a viable candidate is still left that will be picked as last.
+
+Which means we should pick $u_1 = 0$, i.e. rejecting, which gives us the result $J(2,1,1) = \frac{1}{4} + \frac{3}{4}\cdot \frac{3}{4} = \frac{13}{16}$.
+
+Hence 
+\begin{align}
+	J(3,0,2) &= \max_{u_{0}}\left[\frac{2}{3} u_{0}, (1-u_{0}) \frac{2}{3} J(2,1,1) +  \frac{1}{3} J(2,1,2) \right]  \\
+	J(3,0,2) &= \max_{u_{0}}\left[\frac{2}{3} u_{0}, (1-u_{0}) \frac{2}{3} \frac{13}{16} + \frac{1}{3}  \right]  \\
+	J(3,0,2) &= \max_{u_{0}}\left[\frac{2}{3} u_{0}, (1-u_{0}) \frac{7}{8}  \right] 
+\end{align}
+Since $7/8>2/3$, we can see that $u_0 = 0$, i.e. rejecting the first candidate is the optimal strategy.
+The optimal strategy for the whole process is thus to reject the first candidate. Then compare the second to the first, if the first is better than the second, then also reject the second, otherwise pick the second candidate.
+
+\subsubsection*{N=4}
+
+
+
+Let start from the case that $(x=1,y=3)$. We have two possibilities in this case: $J(1,3,0) = 0$ and $J(1,3,1) = 1$, which are both trivial. Let's look at $(x=2,y=2)$. Now we have more options: $J(2,2,2)$, $J(2,2,1)$, $J(2,2,0)$. We can instantly say that the first and last cases are trivial again, 1 and 0 respectively. 
+
+Let us examine the second case $J(2,2,1)$. If the current candidate is ranked lower than some previously picked, it can indicate one of two things: either the best one is already rejected or that the current candidate is not viable. There is a $2\frac{1}{m} \cdot \frac{m}{x} = \frac{1}{2}$ chance of this happening. The second option is that the current candidate is ranked higher than any previously ranked candidate. This can only happen if the second best is picked previously and the best is picked now, sine we only have one viable candidate left. This has a probability of $2\frac{1}{m} \cdot \frac{m}{x} = \frac{1}{2}$. \\
+
+
+Since this assignment already took multiple hours to figure out and just by sketching this scenario I already see that it gets very complicated and have decided that I will skip it in favor of focus on the exam. 
 \end{document}
 
 
