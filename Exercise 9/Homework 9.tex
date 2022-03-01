@@ -37,43 +37,76 @@ We will write the Hamiltonian as
 \end{equation}
 The Hamilton-Jacobi-Bellman equation is
 \begin{align}
-	0 = \min_{u\in U}\left[ \nabla_t J^*(t,x) + H(x,u,p,t)\right]
+	0 = \min_{u\in U}\left[ \nabla_t J^*(t,x) + H(x,u,p,t)\right].
 \end{align}
-with the boundary condition
-\begin{equation}
-	J^*(T,x) = h(x,T).
-\end{equation}
 We take the first order derivative of the Hamiltonian w.r.t $u$ and get
 \begin{equation}
 	H_u = u+\nabla_xJ^*,
 \end{equation}
-which gives us
+which we then minimize by setting the left hand side to 0. This gives us
 \begin{align}
-	0 =&  + u^*+\nabla_xJ^* \\
+	0 =&  u^*+\nabla_xJ^* \\
 	u^* =& - \nabla_xJ^* \\
 	\implies H =&  \frac{1}{4}x^2 + \frac{1}{2}(- \nabla_xJ^*)^2 + \nabla_x J^*\cdot(-10x  - \nabla_xJ^*) \\
-	=& \frac{1}{4}x^2 - \frac{1}{2}(\nabla_xJ^*)^2 -10x\nabla_x J^* 
+	=& \frac{1}{4}x^2 - \frac{1}{2}(\nabla_xJ^*)^2 -10x\nabla_x J^* \\
+	\implies \text{ HJB: } 0 =& J_t^*(t,x) + \frac{1}{4}x^2 - \frac{1}{2}(J_x^*)^2 -10x J_x^*, \qquad | (-J_x^*)^2 = (J_x^*)^2
 \end{align}
 We will use the trial function and the following results
 \begin{align}
 	J(x(t),t) =& a(t)x^2(t) + b(t)x(t) + c(t) \\
 	J_x =& 2ax + b \\
 	J_t =& \dot{a}x^2 + \dot{b}x + \dot{c} \\
-	u =& -\dot{a}x^2 - \dot{b}x - \dot{c} - 2ax - b
+	u =& -2ax - b
 \end{align}
 By inserting this into the HJB equation we get
 \begin{align}
-	0 =& \dot{a}x^2 + \dot{b}x + \dot{c} + \frac{1}{4}x^2 + \frac{1}{2}(2ax + b) ^2 - 10x(2ax + b) \\
-	-(\dot{a}x^2 + \dot{b}x + \dot{c})=& \frac{1}{4}x^2 + \frac{1}{2}a^2x^2 +abx + \frac{1}{2}b^2 - 20ax^2 + 10bx \\ 
-	=& x^2\left( \frac{1}{4}+\frac{1}{2}a^2-20a\right) + x(ab + 10b) + \left( \frac{1}{2} b^2\right) 
+	0 =& \dot{a}x^2 + \dot{b}x + \dot{c} + \frac{1}{4}x^2 - \frac{1}{2}(2ax + b) ^2 - 10x(2ax + b) \\
+	-(\dot{a}x^2 + \dot{b}x + \dot{c})=& \frac{1}{4}x^2 -2 a^2 x^2 - 2 a b x - \frac{1}{2} b^2 - 20ax^2 + 10bx \\
+	-(\dot{a}x^2 + \dot{b}x + \dot{c})=& x^2\left( \frac{1}{4}-2a^2 - 20a\right) +x(-2ab-10b) -\frac{1}{2}b^2
 \end{align}
-And by comparing the terms on both side we get the three ODEs
+And by comparing the terms on both side we get the three DEs
 \begin{align}
-	-\dot{a} =& \frac{1}{4}+\frac{1}{2}a^2-20a \label{eq:1}\\
-	-\dot{b} =& ab + 10b \label{eq:2}\\
-	-\dot{c} =& \frac{1}{2} b^2 \label{eq:3}
+	-\dot{a} =& \frac{1}{4}-2a^2-20a \label{eq:1}\\
+	-\dot{b} =& -2ab - 10b \label{eq:2}\\
+	-\dot{c} =& -\frac{1}{2} b^2 \label{eq:3}
 \end{align}
-We insert equations \ref{eq:1}-\ref{eq:3} into wolfram alpha to solve and get
+Additionally we know from the final state that 
+\begin{align}
+	a(0.04)x^2(0.04) + b(0.04)x(0.04) + c(0.04) =& \frac{1}{2}x^2(0.04)\\
+	\iff &\\
+	a(0.04) =& \frac{1}{2} \label{final_a}\\
+	b(0.04) =& 0\label{final_b}\\
+	c(0.04) =& 0\label{final_c}
+\end{align}
+
+We insert equations \ref{eq:1}-\ref{eq:3} into Mathematica (in the form seen below) to solve 
+\begin{verbatim}
+DSolve[{-a'[t] == 	1/4 - 2 a[t]^2 - 20 a[t],
+        -b'[t] == -2 a[t]*b[t] - 	10 b[t],
+        -c'[t] == -1/2 b[t]^2},
+       {a, b, c}, t]
+\end{verbatim}
+and get the following results.
+\begin{align}
+ 	a^* =& -\frac{\sqrt{402} e^{\sqrt{402} t+4 \sqrt{402} c_1}+20 e^{\sqrt{402} t+4 \sqrt{402} c_1}-\sqrt{402}+20}{4 \left(1+e^{\sqrt{402} t+4 \sqrt{402} c_1}\right)} \\
+ 	b^* =& c_2 \exp \left(-\sqrt{\frac{201}{2}} \left(-t+\sqrt{\frac{2}{201}} \log \left(1+e^{\sqrt{402} (t+4 c_1)}\right)\right)\right) \\
+ 	c^* =& c_3-\frac{e^{-4 \sqrt{402} c_1} c_2{}^2}{2 \sqrt{402} \left(1+e^{\sqrt{402} (t+4 c_1)}\right)}
+\end{align}.
+
+The optimal control law is then
+\begin{align}
+	u^* =& - \nabla_xJ^* = 2ax + b \\
+	u^* =& \frac{x \left(\sqrt{402} e^{\sqrt{402} x+4 \sqrt{402} c_1}+20 e^{\sqrt{402} x+4 \sqrt{402} c_1}-\sqrt{402}+20\right)}{2 \left(1+e^{\sqrt{402} x+4 \sqrt{402} c_1}\right)}-\\ 
+	&c_2 \exp \left(-\sqrt{\frac{201}{2}} \left(-x+\sqrt{\frac{2}{201}} \log \left(1+e^{\sqrt{402} (x+4 c_1)}\right)\right)\right)
+\end{align}
+Using Equations \ref{final_a}-\ref{final_c} we get the following for for the answers:
+\begin{align}
+	a^* =& -\frac{-2.40131+(40.0499\, -\text{4.904702795618173$\grave{ }$*${}^{\wedge}$-15} i) \left(-e^{\sqrt{402} t}\right)}{4 \left(48.0861\, -(1.\, -\text{1.2246467991473532$\grave{ }$*${}^{\wedge}$-16} i) e^{\sqrt{402} t}\right)}\\
+	b^* =& 0\\
+	c^* =& 0\\
+	u^* =&  \frac{x \left(-2.40131+(40.0499\, -\text{4.904702795618173}\cdot10^{-15} i) \left(-e^{\sqrt{402} x}\right)\right)}{2 \left(48.0861\, -(1.\, -\text{1.2246467991473532}\cdot10^{-16} i) e^{\sqrt{402} x}\right)}\\
+	\approx & \frac{\left(-40.0499 e^{\sqrt{402} x}-2.40131\right) x}{2 \left(48.0861\, -1. e^{\sqrt{402} x}\right)}
+\end{align}
 \end{document}
 
 
